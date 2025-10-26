@@ -410,9 +410,6 @@ POSTGRES_PASSWORD=secure-password
 
 MIT License
 
-## 👥 Contributors
-
-BFB Fellow
 
 ## 📞 Support
 
