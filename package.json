@@ -1,0 +1,21 @@
+{
+  "name": "mgnrega-dashboard",
+  "version": "1.0.0",
+  "description": "MGNREGA District Dashboard - Our Voice, Our Rights",
+  "private": true,
+  "workspaces": [
+    "frontend",
+    "backend",
+    "worker"
+  ],
+  "scripts": {
+    "dev": "npm run dev --workspace=frontend & npm run dev --workspace=backend",
+    "build": "npm run build --workspace=frontend",
+    "start": "npm run start --workspace=backend",
+    "test": "npm test --workspaces",
+    "lint": "npm run lint --workspaces"
+  },
+  "keywords": ["mgnrega", "dashboard", "rural", "india"],
+  "author": "BFB Fellow",
+  "license": "MIT"
+}

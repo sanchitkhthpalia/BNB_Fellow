@@ -1,0 +1,23 @@
+{
+  "name": "mgnrega-worker",
+  "version": "1.0.0",
+  "description": "Worker service for polling MGNREGA data",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon index.js"
+  },
+  "dependencies": {
+    "pg": "^8.11.3",
+    "redis": "^4.6.10",
+    "dotenv": "^16.3.1",
+    "node-fetch": "^3.3.2"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.2"
+  },
+  "keywords": ["mgnrega", "worker", "cron"],
+  "author": "BFB Fellow",
+  "license": "MIT"
+}
