@@ -90,9 +90,10 @@ async function fetchMgnregaData() {
     console.log('Starting MGNREGA data fetch...');
     
     try {
-        // Example API endpoint - adjust based on actual data.gov.in API structure
-        const url = `${API_BASE}/mgnrega-data?api-key=${API_KEY}&format=json&limit=1000`;
+        // MGNREGA API endpoint from data.gov.in
+        const url = `https://api.data.gov.in/resource/ee03643a-ee4c-48c2-ac30-9f2ff26ab722?api-key=${API_KEY}&format=json&limit=1000&filters[state_name]=MAHARASHTRA`;
         
+        console.log(`Fetching MGNREGA data from: ${url}`);
         const data = await fetchWithRetry(url);
         
         console.log('Fetched data from API:', data.records?.length || 0, 'records');

@@ -56,7 +56,8 @@ CREATE TABLE IF NOT EXISTS polling_status (
 INSERT INTO states (name, code) VALUES
     ('Maharashtra', 'MH'),
     ('Uttar Pradesh', 'UP'),
-    ('Madhya Pradesh', 'MP')
+    ('Madhya Pradesh', 'MP'),
+    ('Delhi', 'DL')
 ON CONFLICT (code) DO NOTHING;
 
 -- Districts for Maharashtra
@@ -68,6 +69,17 @@ ON CONFLICT (state_id, code) DO NOTHING;
 INSERT INTO districts (state_id, name, code, latitude, longitude)
 SELECT s.id, 'Nagpur', 'MH-09', 21.1458, 79.0882
 FROM states s WHERE s.code = 'MH'
+ON CONFLICT (state_id, code) DO NOTHING;
+
+-- Districts for Delhi
+INSERT INTO districts (state_id, name, code, latitude, longitude)
+SELECT s.id, 'New Delhi', 'DL-01', 28.6139, 77.2090
+FROM states s WHERE s.code = 'DL'
+ON CONFLICT (state_id, code) DO NOTHING;
+
+INSERT INTO districts (state_id, name, code, latitude, longitude)
+SELECT s.id, 'Central Delhi', 'DL-02', 28.6517, 77.2219
+FROM states s WHERE s.code = 'DL'
 ON CONFLICT (state_id, code) DO NOTHING;
 
 -- Sample snapshots for the last 3 months (Pune district)
@@ -90,6 +102,28 @@ SELECT d.id,
        2024, 10, 
        48000, 105000000.00, 1300, 110000000.00, 18
 FROM districts d WHERE d.code = 'MH-12'
+ON CONFLICT (district_id, year, month) DO NOTHING;
+
+-- Sample snapshots for Delhi districts
+INSERT INTO mgnrega_snapshots (district_id, year, month, workdays, wages_paid, people_benefited, funds_disbursed, payment_delay_days)
+SELECT d.id, 
+       2024, 8, 
+       25000, 55000000.00, 800, 60000000.00, 8
+FROM districts d WHERE d.code = 'DL-01'
+ON CONFLICT (district_id, year, month) DO NOTHING;
+
+INSERT INTO mgnrega_snapshots (district_id, year, month, workdays, wages_paid, people_benefited, funds_disbursed, payment_delay_days)
+SELECT d.id, 
+       2024, 9, 
+       28000, 62000000.00, 900, 65000000.00, 6
+FROM districts d WHERE d.code = 'DL-01'
+ON CONFLICT (district_id, year, month) DO NOTHING;
+
+INSERT INTO mgnrega_snapshots (district_id, year, month, workdays, wages_paid, people_benefited, funds_disbursed, payment_delay_days)
+SELECT d.id, 
+       2024, 10, 
+       32000, 71000000.00, 1000, 75000000.00, 5
+FROM districts d WHERE d.code = 'DL-01'
 ON CONFLICT (district_id, year, month) DO NOTHING;
 
 -- Initialize polling status

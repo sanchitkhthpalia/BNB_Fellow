@@ -72,16 +72,32 @@ export default function DistrictDashboard({ districtId, districtName, onBack }) 
       </div>
 
       {/* Additional Info */}
-      <div className="bg-white rounded-lg shadow-lg p-8">
-        <h3 className="text-xl font-bold mb-4">Additional Information</h3>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <div>
-            <span className="text-gray-600">State:</span>{' '}
-            <span className="font-semibold">{data?.state_name}</span>
+      <div className="bg-white rounded-lg shadow-lg p-8 border-2 border-gray-200">
+        <h3 className="text-2xl font-bold mb-6 text-gray-900">Additional Information</h3>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="bg-gray-50 p-4 rounded-lg border">
+            <div className="text-sm text-gray-600 mb-1">State:</div>
+            <div className="text-xl font-bold text-gray-900">{data?.state_name || 'Maharashtra'}</div>
           </div>
-          <div>
-            <span className="text-gray-600">Month:</span>{' '}
-            <span className="font-semibold">{data?.month}/{data?.year}</span>
+          <div className="bg-gray-50 p-4 rounded-lg border">
+            <div className="text-sm text-gray-600 mb-1">Month:</div>
+            <div className="text-xl font-bold text-gray-900">
+              {data?.month ? `${data.month}/${data.year}` : 'October 2024'}
+            </div>
+          </div>
+        </div>
+        
+        {/* Data freshness indicator */}
+        <div className="mt-6 p-4 bg-blue-50 border border-blue-200 rounded-lg">
+          <div className="text-sm text-blue-800">
+            <strong>Last Updated:</strong> {data?.data_timestamp ? 
+              new Date(data.data_timestamp).toLocaleDateString('en-IN', {
+                day: 'numeric',
+                month: 'long',
+                year: 'numeric'
+              }) : 
+              'Sample Data'
+            }
           </div>
         </div>
       </div>
@@ -94,12 +110,12 @@ function MetricCard({ icon, label, value, trend }) {
   const trendIcon = trend === 'up' ? '↑' : '↓'
 
   return (
-    <div className="bg-white rounded-lg shadow-lg p-6 hover:shadow-xl transition-shadow">
-      <div className="text-5xl mb-4">{icon}</div>
-      <div className="text-3xl font-bold mb-2">{value}</div>
+    <div className="bg-white rounded-lg shadow-lg p-6 hover:shadow-xl transition-shadow border-2 border-gray-200 hover:border-blue-300">
+      <div className="text-6xl mb-4 text-center">{icon}</div>
+      <div className="text-4xl font-bold mb-3 text-center text-gray-900">{value}</div>
       <div className="flex items-center justify-between">
-        <div className="text-gray-600 font-semibold">{label}</div>
-        <div className={`${trendColor} font-bold`}>{trendIcon}</div>
+        <div className="text-gray-700 font-bold text-lg">{label}</div>
+        <div className={`${trendColor} font-bold text-2xl`}>{trendIcon}</div>
       </div>
     </div>
   )

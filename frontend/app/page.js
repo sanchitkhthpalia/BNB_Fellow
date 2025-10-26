@@ -17,13 +17,13 @@ export default function Home() {
   }, [])
 
   return (
-    <main className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100">
-      <header className="bg-white shadow-sm">
-        <div className="max-w-7xl mx-auto px-4 py-6">
-          <h1 className="text-3xl font-bold text-gray-900">
+    <main className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-100">
+      <header className="bg-white shadow-lg border-b-2 border-blue-200">
+        <div className="max-w-7xl mx-auto px-4 py-8">
+          <h1 className="text-4xl font-bold text-gray-900 text-center">
             Our Voice, Our Rights
           </h1>
-          <p className="mt-2 text-lg text-gray-600">
+          <p className="mt-3 text-xl text-gray-700 text-center font-medium">
             MGNREGA District Dashboard
           </p>
         </div>
