@@ -51,6 +51,8 @@ cd BFB_Fellow
 ```bash
 cp .env.example .env
 # Edit .env with your configuration
+# REQUIRED: Get API key from https://data.gov.in/
+# See ENVIRONMENT_SETUP.md for detailed instructions
 ```
 
 3. **Start with Docker Compose**
