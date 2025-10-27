@@ -62,118 +62,6 @@
 - ✅ DOCKER_SETUP.md - Troubleshooting guide
 - ✅ PROJECT_SUMMARY.md - This file
 
-## 🏗️ Architecture
-
-```
-┌─────────────────┐
-│   Frontend      │  Next.js 14, Tailwind CSS
-│   (Port 3000)   │  - District selector
-│                 │  - Dashboard with metrics
-│                 │  - Audio summaries
-└────────┬────────┘
-         │ HTTP
-         ▼
-┌─────────────────┐
-│   Nginx         │  Reverse proxy & SSL
-│   (Port 80/443) │
-└────────┬────────┘
-         │
-         ├──────────────────┐
-         ▼                  ▼
-┌─────────────────┐  ┌─────────────────┐
-│   Backend API   │  │  Worker Service │
-│   (Port 3001)   │  │                 │
-│                 │  │  - Polls API    │
-│  - Express      │  │  - Updates DB   │
-│  - Redis cache  │  │  - Cache clear  │
-└────────┬────────┘  └────────┬────────┘
-         │                    │
-         └────────┬───────────┘
-                  │
-         ┌────────▼────────┐
-         │   PostgreSQL    │
-         │   (Port 5432)   │
-         │                 │
-         │  - States       │
-         │  - Districts    │
-         │  - Snapshots    │
-         │  - Poll status  │
-         └─────────────────┘
-                  │
-         ┌────────▼────────┐
-         │     Redis       │
-         │   (Port 6379)   │
-         │                 │
-         │  - Cache layer  │
-         │  - 1hr TTL      │
-         └─────────────────┘
-```
-
-## 📁 Project Structure
-
-```
-BFB_Fellow/
-├── frontend/                    # Next.js application
-│   ├── app/
-│   │   ├── components/
-│   │   │   ├── DistrictSelector.js
-│   │   │   └── DistrictDashboard.js
-│   │   ├── globals.css
-│   │   ├── layout.js
-│   │   └── page.js
-│   ├── Dockerfile
-│   ├── Dockerfile.prod
-│   ├── next.config.js
-│   ├── package.json
-│   ├── tailwind.config.js
-│   └── postcss.config.js
-│
-├── backend/                     # Express API
-│   ├── src/
-│   │   ├── routes/
-│   │   │   ├── districts.js
-│   │   │   └── health.js
-│   │   ├── controllers/
-│   │   │   ├── districts.js
-│   │   │   └── health.js
-│   │   ├── middleware/
-│   │   ├── utils/
-│   │   │   ├── db.js
-│   │   │   └── redis.js
-│   │   └── index.js
-│   ├── db/
-│   │   └── init.sql
-│   ├── tests/
-│   ├── Dockerfile
-│   ├── Dockerfile.prod
-│   └── package.json
-│
-├── worker/                      # Data polling service
-│   ├── index.js
-│   ├── Dockerfile
-│   ├── Dockerfile.prod
-│   └── package.json
-│
-├── nginx/                       # Web server config
-│   ├── nginx.conf
-│   └── conf.d/
-│       └── default.conf
-│
-├── scripts/                     # Deployment scripts
-│
-├── docker-compose.yml           # Development
-├── docker-compose.prod.yml      # Production
-├── package.json
-├── .gitignore
-│
-└── Documentation/
-    ├── README.md
-    ├── SETUP_INSTRUCTIONS.md
-    ├── LOOM_SCRIPT.md
-    ├── DOCKER_SETUP.md
-    └── PROJECT_SUMMARY.md
-```
-
 ## 🚀 Getting Started
 
 ### Prerequisites
@@ -228,8 +116,8 @@ docker-compose up -d
 ## 📊 Sample Data
 
 The database includes:
-- **3 States**: Maharashtra, Uttar Pradesh, Madhya Pradesh
-- **2 Districts**: Pune, Nagpur (both in Maharashtra)
+
+- **2 Districts**: Pune, Nagpur (both in Maharashtra), Delhi
 - **3 Months of Data**: Aug 2024, Sep 2024, Oct 2024
 
 Sample Metrics (Pune district):
@@ -370,13 +258,6 @@ curl http://localhost:3000
 
 MIT License
 
-## 👥 Credits
-
-- **Author**: BFB Fellow
-- **Tech Stack**: Next.js, Express, PostgreSQL, Redis, Docker
-- **Design**: Focus on accessibility and low-literacy users
-
----
 
 ## 🎯 Project Completion Status
 
@@ -385,5 +266,3 @@ MIT License
 ✅ **Well Documented** - Comprehensive documentation  
 ✅ **Accessible** - Low-literacy friendly design  
 ✅ **Deployment Ready** - VPS deployment instructions included
-
-**The project is ready for deployment and demo!** 🚀
