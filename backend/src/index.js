@@ -4,7 +4,7 @@ import helmet from 'helmet';
 import compression from 'compression';
 import rateLimit from 'express-rate-limit';
 import dotenv from 'dotenv';
-import { connectRedis } from './utils/redis.js';
+// import { connectRedis } from './utils/redis.js';
 import districtRoutes from './routes/districts.js';
 import healthRoutes from './routes/health.js';
 
@@ -63,8 +63,8 @@ app.use((req, res) => {
 // Start server
 async function startServer() {
     try {
-        // Connect to Redis
-        await connectRedis();
+        // Temporarily skipping Redis connection
+        // await connectRedis();
         
         app.listen(PORT, () => {
             console.log(`Server running on port ${PORT}`);
